@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Participant Form</title>
+    <link rel="stylesheet" th:href="@{/css/loandtls.css}">
+    <script th:src="@{/js/loandtls.js}"></script>
+</head>
+<body>
+<h2>Participant Details</h2>
+<form th:action="@{/participants}" th:object="${participant}" method="post">
+    <div>
+        <label>Participant Entity ID</label>
+        <input type="text" th:field="*{prtcptenttyId}" placeholder="Participant Entity ID" />
+    </div>
+    <div>
+        <label>Full Name</label>
+        <input type="text" th:field="*{fulnm}" placeholder="Full Name" />
+    </div>
+    <div>
+        <label>Party Type</label>
+        <select th:field="*{partytyp}">
+            <option value="">Party Type</option>
+            <option>Debtor</option>
+            <option>Co-obligant</option>
+            <option>Guarantor</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Contact Name</label>
+        <input type="text" th:field="*{cntrprtycntnm}" placeholder="Contact Name" />
+    </div>
+
+    <div>
+        <label>Designation</label>
+        <input type="text" th:field="*{cntrprtycntdsgn}" placeholder="Designation" />
+    </div>
+
+    <div>
+        <label>Mobile Number</label>
+        <input type="text" th:field="*{cntrprtycntmobno}" placeholder="Mobile Number" />
+    </div>
+
+    <div>
+        <label>Alternate Mobile</label>
+        <input type="text" th:field="*{altmobno}" placeholder="Alternate Mobile" />
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input type="email" th:field="*{emlid}" placeholder="Email" />
+    </div>
+
+    <div>
+        <label>Alternate Email</label>
+        <input type="email" th:field="*{altemlid}" placeholder="Alternate Email" />
+    </div>
+
+    <div>
+        <label>PAN Number</label>
+        <input type="text" th:field="*{panno}" placeholder="PAN Number" />
+    </div>
+
+    <div>
+        <label>Aadhaar Number</label>
+        <input type="text" th:field="*{signatoryAadhar}" placeholder="Aadhaar Number" />
+    </div>
+
+    <div>
+        <label>Gender</label>
+        <select th:field="*{signatoryGender}">
+            <option value="">Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Counter Party Address</label>
+        <input type="text" th:field="*{cntrprtyaddr}" placeholder="Counter Party Address" />
+    </div>
+
+    <div>
+        <label>Company Address</label>
+        <input type="text" th:field="*{comaddr}" placeholder="Company Address" />
+    </div>
+
+    <div>
+        <label>PIN Code</label>
+        <input type="text" th:field="*{pin}" placeholder="PIN Code" />
+    </div>
+
+    <div>
+        <label>Registered Office PIN</label>
+        <input type="text" th:field="*{regoffpin}" placeholder="Registered Office PIN" />
+    </div>
+
+    <div>
+        <label>Date Of Incorporation</label>
+        <input type="date" th:field="*{doi}" />
+    </div>
+
+    <div>
+        <label>Legal Constitution</label>
+        <input type="text" th:field="*{lglcnstn}" placeholder="Legal Constitution" />
+    </div>
+
+    <div>
+        <label>Relationship</label>
+        <input type="text" th:field="*{reltocntrct}" />
+    </div>
+
+    <div>
+        <label>OVD Type</label>
+        <input type="text" th:field="*{ovdtype}" />
+    </div>
+
+    <div>
+        <label>OVD ID</label>
+        <input type="text" th:field="*{ovdid}" />
+    </div>
+
+    <div>
+        <label>CIN</label>
+        <input type="text" th:field="*{cin}" />
+    </div>
+
+    <div>
+        <label>KIN</label>
+        <input type="text" th:field="*{kin}" />
+    </div>
+
+    <div>
+        <label>Sequence Number</label>
+        <input type="number" th:field="*{seqno}" />
+    </div>
+
+    <div>
+        <label>Document IDs</label>
+        <input type="text" th:field="*{documentIds}" placeholder="Comma separated" />
+    </div>
+
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+</body>
+</html>
