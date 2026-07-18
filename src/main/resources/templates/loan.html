@@ -2,163 +2,215 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Loan & Security Form</title>
+    <title>Multi Step Accordion Form - Loan & Security</title>
     <link rel="stylesheet" th:href="@{/css/loandtls.css}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script th:src="@{/js/loandtls.js}"></script>
 </head>
 <body>
-<h2>Loan & Security - Details</h2>
-<form th:action="@{/loan-records}" th:object="${loanRecord}" method="post" enctype="multipart/form-data">
 
-    <input type="hidden" th:field="*{participant.id}" />
+<div id="form2Section">
 
-    <h3>Loan Details</h3>
-    <div>
-        <label>Loan No</label>
-        <input type="text" th:field="*{loanDetails.loanno}" placeholder="Loan No" />
-    </div>
-    <div>
-        <label>Sanction No</label>
-        <input type="text" th:field="*{loanDetails.snctnno}" placeholder="Sanction No" />
-    </div>
-    <div>
-        <label>Charge Amount</label>
-        <input type="text" th:field="*{loanDetails.chgamt}" placeholder="Charge Amount" />
-    </div>
+    <h3>Loan & Security - Details</h3>
 
-    <div>
-        <input type="text" th:field="*{loanDetails.crdtsubtyp}" placeholder="Credit Sub Type" />
-        <input type="text" th:field="*{loanDetails.currofsanc}" placeholder="Currency Of Sanction" />
-        <input type="text" th:field="*{loanDetails.dtofsnctn}" placeholder="Date Of Sanction" />
-    </div>
+    <form th:action="@{/loan-records}" th:object="${loanRecord}" method="post" enctype="multipart/form-data">
 
-    <div>
-        <input type="text" th:field="*{loanDetails.fcltynm}" placeholder="Facility Name" />
-        <input type="text" th:field="*{loanDetails.fundtyp}" placeholder="Fund Type" />
-        <input type="text" th:field="*{loanDetails.isacctclosed}" placeholder="Account Closed" />
-    </div>
+        <!-- Section 1 : Loan Details -->
+        <div class="accordion">
+            Loan Details
+        </div>
 
-    <div>
-        <input type="text" th:field="*{loanDetails.ntrofcrdt}" placeholder="Nature Of Credit" />
-        <input type="text" th:field="*{loanDetails.emiamt}" placeholder="EMI Amount" />
-        <input type="text" th:field="*{loanDetails.rtofint}" placeholder="Rate Of Interest" />
-    </div>
+        <div class="panel">
 
-    <div>
-        <input type="text" th:field="*{loanDetails.amtovrdue}" placeholder="Amount Overdue" />
-        <input type="text" th:field="*{loanDetails.dtofdbrs}" placeholder="Date Of Disbursement" />
-        <input type="text" th:field="*{loanDetails.intamt}" placeholder="Interest Amount" />
-    </div>
+            <div class="form-row">
 
-    <div>
-        <input type="text" th:field="*{loanDetails.oldaccno}" placeholder="Old Account No" />
-        <input type="text" th:field="*{loanDetails.priamt}" placeholder="Principal Amount" />
-        <input type="text" th:field="*{loanDetails.dpd}" placeholder="DPD" />
-    </div>
+                <div class="form-group">
+                    <label for="loanno">Loan No <span class="required">*</span></label>
+                    <input type="text" id="loanno" th:field="*{loanDetails.loanno}" placeholder="Enter Loan No" required>
+                </div>
 
-    <div>
-        <input type="text" th:field="*{loanDetails.dp}" placeholder="DP" />
-        <input type="text" th:field="*{loanDetails.loc}" placeholder="Location" />
-        <input type="text" th:field="*{loanDetails.rpyfrq}" placeholder="Repayment Frequency" />
-    </div>
+                <div class="form-group">
+                    <label for="snctnno">Sanction No <span class="required">*</span></label>
+                    <input type="text" id="snctnno" th:field="*{loanDetails.snctnno}" placeholder="Enter Sanction No" required>
+                </div>
 
-    <div>
-        <input type="text" th:field="*{loanDetails.lndngarrg}" placeholder="Lending Arrangement" />
-        <input type="text" th:field="*{loanDetails.snctnamt}" placeholder="Sanction Amount" />
-        <input type="text" th:field="*{loanDetails.tenure}" placeholder="Tenure" />
-    </div>
+                <div class="form-group">
+                    <label for="chgamt">Charge Amount <span class="required">*</span></label>
+                    <input type="text" id="chgamt" th:field="*{loanDetails.chgamt}" placeholder="Enter Charge Amount" required>
+                </div>
 
-    <div>
-        <input type="text" th:field="*{loanDetails.toutstndamt}" placeholder="Total Outstanding Amount" />
-        <input type="text" th:field="*{loanDetails.remarkparta}" placeholder="Remark Part A" />
-        <input type="text" th:field="*{loanDetails.bu}" placeholder="Business Unit" />
-    </div>
+            </div>
 
-    <h3>Security Details</h3>
-    <div>
-        <input type="text" th:field="*{securityDetails.scrty_loanno}" placeholder="Loan No" />
-        <input type="text" th:field="*{securityDetails.dtofvltn}" placeholder="Date Of Valuation" />
-        <input type="text" th:field="*{securityDetails.vlofscrty}" placeholder="Value Of Security" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="crdtsubtyp" th:field="*{loanDetails.crdtsubtyp}" placeholder="Credit Sub Type">
+                <input type="text" id="currofsanc" th:field="*{loanDetails.currofsanc}" placeholder="Currency Of Sanction">
+                <input type="text" id="dtofsnctn" th:field="*{loanDetails.dtofsnctn}" placeholder="Date Of Sanction">
+            </div>
 
-    <div>
-        <input type="text" th:field="*{securityDetails.assetid}" placeholder="Asset ID" />
-        <input type="text" th:field="*{securityDetails.scrtyidcersai}" placeholder="Security ID CERSAI" />
-        <input type="text" th:field="*{securityDetails.asstyp}" placeholder="Asset Type" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="fcltynm" th:field="*{loanDetails.fcltynm}" placeholder="Facility Name">
+                <input type="text" id="fundtyp" th:field="*{loanDetails.fundtyp}" placeholder="Fund Type">
+                <input type="text" id="isacctclosed" th:field="*{loanDetails.isacctclosed}" placeholder="Account Closed">
+            </div>
 
-    <div>
-        <input type="text" th:field="*{securityDetails.scrtyidroc}" placeholder="Security ID ROC" />
-        <input type="text" th:field="*{securityDetails.dscofscrty}" placeholder="Description Of Security" />
-        <input type="text" th:field="*{securityDetails.typofchrg}" placeholder="Type Of Charge" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="ntrofcrdt" th:field="*{loanDetails.ntrofcrdt}" placeholder="Nature Of Credit">
+                <input type="text" id="emiamt" th:field="*{loanDetails.emiamt}" placeholder="EMI Amount">
+                <input type="text" id="rtofint" th:field="*{loanDetails.rtofint}" placeholder="Rate Of Interest">
+            </div>
 
-    <div>
-        <input type="text" th:field="*{securityDetails.dtofcrtn}" placeholder="Date Of Creation" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="amtovrdue" th:field="*{loanDetails.amtovrdue}" placeholder="Amount Overdue">
+                <input type="text" id="dtofdbrs" th:field="*{loanDetails.dtofdbrs}" placeholder="Date Of Disbursement">
+                <input type="text" id="intamt" th:field="*{loanDetails.intamt}" placeholder="Interest Amount">
+            </div>
 
-    <h3>Entity Details</h3>
-    <div>
-        <input type="text" th:field="*{entityDetails.entty_pan}" placeholder="Entity PAN" />
-        <input type="text" th:field="*{entityDetails.entty_name}" placeholder="Entity Name" />
-        <input type="text" th:field="*{entityDetails.lgl_cnstn}" placeholder="Legal Constitution" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="oldaccno" th:field="*{loanDetails.oldaccno}" placeholder="Old Account No">
+                <input type="text" id="priamt" th:field="*{loanDetails.priamt}" placeholder="Principal Amount">
+                <input type="text" id="dpd" th:field="*{loanDetails.dpd}" placeholder="DPD">
+            </div>
 
-    <div>
-        <input type="text" th:field="*{entityDetails.doi}" placeholder="Date Of Incorporation" />
-        <input type="text" th:field="*{entityDetails.eml_id}" placeholder="Email ID" />
-        <input type="text" th:field="*{entityDetails.cntct_no}" placeholder="Contact No" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="dp" th:field="*{loanDetails.dp}" placeholder="DP">
+                <input type="text" id="loc" th:field="*{loanDetails.loc}" placeholder="Location">
+                <input type="text" id="rpyfrq" th:field="*{loanDetails.rpyfrq}" placeholder="Repayment Frequency">
+            </div>
 
-    <div>
-        <input type="text" th:field="*{entityDetails.reg_addr}" placeholder="Registered Address" />
-        <input type="text" th:field="*{entityDetails.reg_pin}" placeholder="Registered PIN" />
-        <input type="text" th:field="*{entityDetails.comm_addr}" placeholder="Communication Address" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="lndngarrg" th:field="*{loanDetails.lndngarrg}" placeholder="Lending Arrangement">
+                <input type="text" id="snctnamt" th:field="*{loanDetails.snctnamt}" placeholder="Sanction Amount">
+                <input type="text" id="tenure" th:field="*{loanDetails.tenure}" placeholder="Tenure">
+            </div>
 
-    <div>
-        <input type="text" th:field="*{entityDetails.comm_pin}" placeholder="Communication PIN" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="toutstndamt" th:field="*{loanDetails.toutstndamt}" placeholder="Total Outstanding Amount">
+                <input type="text" id="remarkparta" th:field="*{loanDetails.remarkparta}" placeholder="Remark Part A">
+                <input type="text" id="bu" th:field="*{loanDetails.bu}" placeholder="Business Unit">
+            </div>
 
-    <h3>E-Stamp Details</h3>
-    <div>
-        <input type="text" th:field="*{eStampDetails.firstparty}" placeholder="First Party" />
-        <input type="text" th:field="*{eStampDetails.considerationPrice}" placeholder="Consideration Price" />
-        <input type="text" th:field="*{eStampDetails.stampDutyAmount}" placeholder="Stamp Duty Amount" />
-    </div>
+        </div>
 
-    <div>
-        <input type="text" th:field="*{eStampDetails.stampdutyPaidby}" placeholder="Stamp Duty Paid By" />
-        <input type="text" th:field="*{eStampDetails.secondparty}" placeholder="Second Party" />
-        <input type="text" th:field="*{eStampDetails.documentID}" placeholder="Document ID" />
-    </div>
 
-    <div>
-        <input type="text" th:field="*{eStampDetails.articleCode}" placeholder="Article Code" />
-        <input type="text" th:field="*{eStampDetails.descriptionofDocument}" placeholder="Description Of Document" />
-        <input type="text" th:field="*{eStampDetails.firstPartyOVDType}" placeholder="First Party OVD Type" />
-    </div>
+        <!-- Section 2 : Security Details -->
+        <div class="accordion">
+            Security Details
+        </div>
 
-    <div>
-        <input type="text" th:field="*{eStampDetails.firstPartyOVDValue}" placeholder="First Party OVD Value" />
-        <input type="text" th:field="*{eStampDetails.secondPartyOVDType}" placeholder="Second Party OVD Type" />
-        <input type="text" th:field="*{eStampDetails.secondPartyOVDValue}" placeholder="Second Party OVD Value" />
-    </div>
+        <div class="panel">
 
-    <div>
-        <input type="text" th:field="*{eStampDetails.firstPartyPin}" placeholder="First Party PIN" />
-        <input type="text" th:field="*{eStampDetails.secondPartyPin}" placeholder="Second Party PIN" />
-    </div>
+            <div class="form-row">
+                <input type="text" id="scrty_loanno" th:field="*{securityDetails.scrty_loanno}" placeholder="Loan No">
+                <input type="text" id="dtofvltn" th:field="*{securityDetails.dtofvltn}" placeholder="Date Of Valuation">
+                <input type="text" id="vlofscrty" th:field="*{securityDetails.vlofscrty}" placeholder="Value Of Security">
+            </div>
 
-    <h3>Supporting Documents Upload</h3>
-    <div>
-        <input type="file" name="files" multiple />
-    </div>
+            <div class="form-row">
+                <input type="text" id="assetid" th:field="*{securityDetails.assetid}" placeholder="Asset ID">
+                <input type="text" id="scrtyidcersai" th:field="*{securityDetails.scrtyidcersai}" placeholder="Security ID CERSAI">
+                <input type="text" id="asstyp" th:field="*{securityDetails.asstyp}" placeholder="Asset Type">
+            </div>
 
-    <div>
-        <button type="submit">Save Form</button>
-    </div>
+            <div class="form-row">
+                <input type="text" id="scrtyidroc" th:field="*{securityDetails.scrtyidroc}" placeholder="Security ID ROC">
+                <input type="text" id="dscofscrty" th:field="*{securityDetails.dscofscrty}" placeholder="Description Of Security">
+                <input type="text" id="typofchrg" th:field="*{securityDetails.typofchrg}" placeholder="Type Of Charge">
+            </div>
 
-</form>
+            <div class="form-row">
+                <input type="text" id="dtofcrtn" th:field="*{securityDetails.dtofcrtn}" placeholder="Date Of Creation">
+            </div>
+
+        </div>
+
+        <!-- Section 3 : Entity Details -->
+        <div class="accordion">
+            Entity Details
+        </div>
+
+        <div class="panel">
+
+            <div class="form-row">
+                <input type="text" id="entty_pan" th:field="*{entityDetails.entty_pan}" placeholder="Entity PAN">
+                <input type="text" id="entty_name" th:field="*{entityDetails.entty_name}" placeholder="Entity Name">
+                <input type="text" id="lgl_cnstn" th:field="*{entityDetails.lgl_cnstn}" placeholder="Legal Constitution">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="doi_ent" th:field="*{entityDetails.doi}" placeholder="Date Of Incorporation">
+                <input type="text" id="eml_id" th:field="*{entityDetails.eml_id}" placeholder="Email ID">
+                <input type="text" id="cntct_no" th:field="*{entityDetails.cntct_no}" placeholder="Contact No">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="reg_addr" th:field="*{entityDetails.reg_addr}" placeholder="Registered Address">
+                <input type="text" id="reg_pin" th:field="*{entityDetails.reg_pin}" placeholder="Registered PIN">
+                <input type="text" id="comm_addr" th:field="*{entityDetails.comm_addr}" placeholder="Communication Address">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="comm_pin" th:field="*{entityDetails.comm_pin}" placeholder="Communication PIN">
+            </div>
+
+        </div>
+
+
+        <!-- Section 4 : E-Stamp Details -->
+        <div class="accordion">
+            E-Stamp Details
+        </div>
+
+        <div class="panel">
+
+            <div class="form-row">
+                <input type="text" id="firstparty" th:field="*{eStampDetails.firstparty}" placeholder="First Party">
+                <input type="text" id="considerationPrice" th:field="*{eStampDetails.considerationPrice}" placeholder="Consideration Price">
+                <input type="text" id="stampDutyAmount" th:field="*{eStampDetails.stampDutyAmount}" placeholder="Stamp Duty Amount">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="stampdutyPaidby" th:field="*{eStampDetails.stampdutyPaidby}" placeholder="Stamp Duty Paid By">
+                <input type="text" id="secondparty" th:field="*{eStampDetails.secondparty}" placeholder="Second Party">
+                <input type="text" id="documentID" th:field="*{eStampDetails.documentID}" placeholder="Document ID">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="articleCode" th:field="*{eStampDetails.articleCode}" placeholder="Article Code">
+                <input type="text" id="descriptionofDocument" th:field="*{eStampDetails.descriptionofDocument}" placeholder="Description Of Document">
+                <input type="text" id="firstPartyOVDType" th:field="*{eStampDetails.firstPartyOVDType}" placeholder="First Party OVD Type">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="firstPartyOVDValue" th:field="*{eStampDetails.firstPartyOVDValue}" placeholder="First Party OVD Value">
+                <input type="text" id="secondPartyOVDType" th:field="*{eStampDetails.secondPartyOVDType}" placeholder="Second Party OVD Type">
+                <input type="text" id="secondPartyOVDValue" th:field="*{eStampDetails.secondPartyOVDValue}" placeholder="Second Party OVD Value">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="firstPartyPin" th:field="*{eStampDetails.firstPartyPin}" placeholder="First Party PIN">
+                <input type="text" id="secondPartyPin" th:field="*{eStampDetails.secondPartyPin}" placeholder="Second Party PIN">
+            </div>
+
+        </div>
+        
+        <!-- Section 5 : File Upload -->
+        <div class="accordion">
+            Supporting Documents Upload
+        </div>
+
+        <div class="panel">
+            <div class="form-row">
+                <input type="file" id="loanDocument" name="files" multiple>
+                <div id="fileList"></div>
+            </div>
+        </div>
+
+        <button id="saveForm2" type="submit">Save Form </button>
+        <button id="nextBtn" type="button">Next</button>
+
+    </form>
+
+</div>
+
 </body>
 </html>
