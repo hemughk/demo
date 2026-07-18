@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.List;
 
+/**
+ * REST API Controller for Loan Records
+ * For form-based submission, use WebController instead
+ */
 @RestController
 @RequestMapping("/api/loan-records")
 public class LoanRecordController {
@@ -35,7 +39,9 @@ public class LoanRecordController {
     }
 
     @GetMapping
-    public List<LoanRecord> list() { return loanRepo.findAll(); }
+    public List<LoanRecord> list() {
+        return loanRepo.findAll();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<LoanRecord> get(@PathVariable Long id) {
@@ -76,7 +82,7 @@ public class LoanRecordController {
         return ResponseEntity.noContent().build();
     }
 
-    // File upload - saves file to disk and metadata to SupportingDocument
+    // File upload endpoint - saves file to disk and metadata to SupportingDocument
     @PostMapping("/{loanId}/files")
     public ResponseEntity<?> uploadFiles(@PathVariable Long loanId, @RequestParam("files") MultipartFile[] files) throws IOException {
         LoanRecord loan = loanRepo.findById(loanId).orElse(null);
@@ -86,6 +92,8 @@ public class LoanRecordController {
         Files.createDirectories(dir);
 
         for (MultipartFile file : files) {
+            if (file.isEmpty()) continue;
+            
             String filename = StringUtils.cleanPath(file.getOriginalFilename());
             Path target = dir.resolve(System.currentTimeMillis() + "_" + filename);
             Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
