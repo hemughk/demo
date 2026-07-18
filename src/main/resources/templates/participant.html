@@ -27,9 +27,9 @@
                 <input type="text" id="fulnm" th:field="*{fulnm}" placeholder="Full Name">
                 <select id="partytyp" th:field="*{partytyp}">
                     <option value="">Party Type</option>
-                    <option>Debtor</option>
-                    <option>Co-obligant</option>
-                    <option>Guarantor</option>
+                    <option value="Debtor">Debtor</option>
+                    <option value="Co-obligant">Co-obligant</option>
+                    <option value="Guarantor">Guarantor</option>
                 </select>
             </div>
 
@@ -50,9 +50,9 @@
                 <input type="text" id="signatoryAadhar" th:field="*{signatoryAadhar}" placeholder="Aadhaar Number">
                 <select id="signatoryGender" th:field="*{signatoryGender}">
                     <option value="">Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
 
