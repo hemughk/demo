@@ -32,6 +32,51 @@ $(document).ready(function() {
     $("#form1").hide();
   });
 
+  // ----- Layout: force 3/2/1 column layout via JS (handles templates without .form-group) -----
+  function applyColumnLayout() {
+    var rows = document.querySelectorAll('.form-row');
+    rows.forEach(function(row) {
+      var children = Array.prototype.slice.call(row.children).filter(function(el){
+        // ignore hidden elements
+        return el.offsetParent !== null;
+      });
+      var containerWidth = row.clientWidth || row.getBoundingClientRect().width;
+      var cols = 3;
+      if (containerWidth < 600) cols = 1;
+      else if (containerWidth < 900) cols = 2;
+      var gap = 20; // match CSS gap
+      // compute column width in pixels
+      var totalGap = (cols - 1) * gap;
+      var colWidth = Math.floor((containerWidth - totalGap) / cols);
+      // apply width to each child
+      children.forEach(function(child, idx) {
+        // if child has class full-width, let it span 100%
+        if (child.classList.contains('full-width')) {
+          child.style.width = '100%';
+          child.style.flex = '0 0 100%';
+        } else {
+          // set to colWidth
+          child.style.boxSizing = 'border-box';
+          child.style.width = colWidth + 'px';
+          child.style.flex = '0 0 ' + colWidth + 'px';
+        }
+      });
+    });
+  }
+
+  // debounce helper
+  function debounce(fn, delay) {
+    var t;
+    return function() {
+      clearTimeout(t);
+      t = setTimeout(fn, delay);
+    };
+  }
+
+  // run on load and resize
+  applyColumnLayout();
+  window.addEventListener('resize', debounce(applyColumnLayout, 120));
+
   // ----- Participant (Form 1) local save -----
   let part1List = JSON.parse(localStorage.getItem("part1List")) || [];
 
@@ -86,6 +131,9 @@ $(document).ready(function() {
     $("#form1").find("input").val("");
     $("#form1").find("select").prop("selectedIndex", 0);
 
+    // reapply layout because inputs cleared (keeps sizes consistent)
+    applyColumnLayout();
+
     alert(part1.id + " Saved");
   });
 
@@ -120,6 +168,9 @@ $(document).ready(function() {
     $("#kin").val(item.kin);
     $("#seqno").val(item.seqno);
     $("#documentIds").val(item.documentIds);
+
+    // reapply layout after populating
+    applyColumnLayout();
   });
 
   renderPart1Links();
